@@ -1,11 +1,16 @@
 package com.nate.spring.security.Spring.Security.Demo.appuser;
 
+import com.nate.spring.security.Spring.Security.Demo.registration.token.ConfirmationToken;
+import com.nate.spring.security.Spring.Security.Demo.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +20,7 @@ public class AppUserService implements UserDetailsService {
             "User with email %s not found";
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
 
     @Override
@@ -36,8 +42,20 @@ public class AppUserService implements UserDetailsService {
 
         appUser.setPassword(encodedPassword);
         appUserRepository.save(appUser);
-        return "It Works password is " + appUser.getPassword() +
-                "Encoded Password is " + encodedPassword;
+
+        String token = UUID.randomUUID().toString();
+        //Send Confirmation token to user
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                appUser
+        );
+
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        //TODO: send token to email
+        return token;
     }
 
 }
