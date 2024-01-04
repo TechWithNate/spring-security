@@ -17,7 +17,7 @@
 #        format_sql: true
 #      show-sql: true
 server:
-  port: 8001
+  port: 8002
   error:
     include-message: always
     include-binding-errors: always
@@ -35,20 +35,33 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
       show-sql: true
-  mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
+  spring:
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: dzrekepokunathan123@gmail.com
+      password: uuqs ncth muiy lnzk
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
 
-    properties:
-      mail:
-        smtp:
-          ssl:
-            trust: "*"
-          auth: true
-          starttls:
-            enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
+#  mail:
+#    host: localhost
+#    port: 1025
+#    username: hello
+#    password: hello
+#
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            trust: "*"
+#          auth: true
+#          starttls:
+#            enable: true
+#          connectiontimeout: 5000
+#          timeout: 3000
+#          writetimeout: 5000
