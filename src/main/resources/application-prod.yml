@@ -6,9 +6,9 @@ server:
 
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/registration} # Use the DATABASE_URL environment variable provided by Heroku
-    username: ${DB_USERNAME:nate} # Use environment variables for sensitive information
-    password: ${DB_PASSWORD:123nathan}
+    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME} # Use the DATABASE_URL environment variable provided by Heroku
+    username: ${PROD_DB_USERNAME} # Use environment variables for sensitive information
+    password: ${PROD_DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update # Change to update or validate for production, create-drop is not suitable
