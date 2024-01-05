@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8002} # Use the PORT environment variable provided by Heroku
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/registration} # Use the DATABASE_URL environment variable provided by Heroku
+    username: ${DB_USERNAME:nate} # Use environment variables for sensitive information
+    password: ${DB_PASSWORD:123nathan}
+  jpa:
+    hibernate:
+      ddl-auto: update # Change to update or validate for production, create-drop is not suitable
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+      show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dzrekepokunathan123@gmail.com
+    password: ${GMAIL_PASSWORD:} # Use environment variables for sensitive information
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
