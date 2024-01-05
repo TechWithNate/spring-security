@@ -36,7 +36,7 @@ public class RegistrationService {
                 AppUserRole.USER
         ));
         String link = "http://localhost:8002/api/v1/registration/confirm?token=" + token;
-        String link1 = "https://nate-spring-security.herokuapp.com/api/v1/registration/confirm?token=" + token;
+        String link1 = "https://nate-spring-security-c47ddf4f05f0.herokuapp.com/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
                 buildEmail(request.getFirstname(), link1));
